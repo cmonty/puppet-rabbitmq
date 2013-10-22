@@ -1,5 +1,7 @@
-class rabbitmq {
-  include rabbitmq::config
+class rabbitmq($port = 15672) {
+  class { "rabbitmq::config":
+    port => $port,
+  }
 
   file { '/Library/LaunchDaemons/dev.rabbitmq.plist':
     content => template('rabbitmq/dev.rabbitmq.plist.erb'),
